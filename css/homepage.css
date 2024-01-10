@@ -1,5 +1,10 @@
 
-.cat-photo {
+.selfie-photo {
+  margin: 10px;
+  max-width: 500px;
+}
+
+.selfie2-photo {
   margin: 10px;
   max-width: 500px;
 }
