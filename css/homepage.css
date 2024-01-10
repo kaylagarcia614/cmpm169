@@ -7,3 +7,8 @@
   margin: 10px;
   max-width: 500px;
 }
+
+.experiment-links a {
+  display: block;
+  margin-bottom: 10px; /* Adjust the margin to your preference */
+}
