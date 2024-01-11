@@ -1,11 +1,12 @@
 
 .me-photo {
   margin: 10px;
-  max-width: 500px;
+  max-width: 300px;
 }
 .me2-photo {
   margin: 10px;
-  max-width: 500px;
+  max-width: 300px;
+  max-height: 400px;
 }
 
 .experiment-links a {
