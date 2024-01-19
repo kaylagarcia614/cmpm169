@@ -47,10 +47,6 @@ function draw() {
 
       strokeWeight(15 + 15*sin(d + C))
       point(x * spacing + PAD, y * spacing + PAD)
-
-      stroke(255,0,0)
-      strokeWeight(5)
-      line(x1,y1,x2,y2)
     }
   }
 }
@@ -65,8 +61,7 @@ function pDistance(x, y, x1, y1, x2, y2) {
   var dot = A * C + B * D;
   var len_sq = C * C + D * D;
   var param = -1;
-  if (len_sq != 0) //in case of 0 length line
-      param = dot / len_sq;
+ 
 
   var xx, yy;
 
