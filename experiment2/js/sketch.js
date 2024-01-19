@@ -1,67 +1,89 @@
-// sketch.js - purpose and description here
-// Author: Your Name
-// Date:
+const S = 600;
 
-// Here is how you might set up an OOP p5.js project
-// Note that p5.js looks for a file called sketch.js
+const PAD = S/12
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
-const VALUE1 = 1;
-const VALUE2 = 2;
+const N = 24
+const spacing = (S-PAD*2)/N
 
-// Globals
-let myInstance;
-let canvasContainer;
-
-class MyClass {
-    constructor(param1, param2) {
-        this.property1 = param1;
-        this.property2 = param2;
-    }
-
-    myMethod() {
-        // code to run when method is called
-    }
-}
-
-// setup() function is called once when the program starts
 function setup() {
-    // place our canvas, making it fit our container
-    canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-    canvas.parent("canvas-container");
-    // resize canvas is the page is resized
-    $(window).resize(function() {
-        console.log("Resizing...");
-        resizeCanvas(canvasContainer.width(), canvasContainer.height());
-    });
-    // create an instance of the class
-    myInstance = new MyClass(VALUE1, VALUE2);
+  createCanvas(S, S);
 
-    var centerHorz = windowWidth / 2;
-    var centerVert = windowHeight / 2;
+  frameRate(50)
 }
 
-// draw() function is called repeatedly, it's the main animation loop
+const loopLength = 350
+
 function draw() {
-    background(220);    
-    // call a method on the instance
-    myInstance.myMethod();
+  background(0);
 
-    // Put drawings here
-    var centerHorz = canvasContainer.width() / 2 - 125;
-    var centerVert = canvasContainer.height() / 2 - 125;
-    fill(234, 31, 81);
-    noStroke();
-    rect(centerHorz, centerVert, 250, 250);
-    fill(255);
-    textStyle(BOLD);
-    textSize(140);
-    text("p5*", centerHorz + 10, centerVert + 200);
+
+  let t = (frameCount%loopLength)/loopLength
+  let C = map(t, 0, 1, 0, TAU)
+
+  for(let x = 0; x<=N; x++){
+    for(let y = 0; y<=N; y++){
+
+      //let d = dist(x * spacing + PAD, y * spacing + PAD,200,200)/100
+
+      let R = 100
+      let x1 = 300 + R * cos(C)
+      let y1 = 300 + R * sin(C)
+
+      let x2 = 300 + R * cos(C+PI)
+      let y2 = 300 + R * sin(C+PI)
+
+
+
+      let factor = 18
+
+      let d = pDistance(x * spacing + PAD, y * spacing + PAD,x1,y1,x2,y2)/factor
+
+      let rat = map(sin(C),-1,1,0.2,.8)
+
+
+      stroke(127.5 + 127.5 * sin(d + C),
+             80 - 127.5 * cos(d*.75 + C),
+             127.5 + 127.5 * cos(d*.15 + C))
+
+      strokeWeight(15 + 15*sin(d + C))
+      point(x * spacing + PAD, y * spacing + PAD)
+
+      stroke(255,0,0)
+      strokeWeight(5)
+      line(x1,y1,x2,y2)
+    }
+  }
 }
 
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-    // code to run when mouse is pressed
+function pDistance(x, y, x1, y1, x2, y2) {
+
+  var A = x - x1;
+  var B = y - y1;
+  var C = x2 - x1;
+  var D = y2 - y1;
+
+  var dot = A * C + B * D;
+  var len_sq = C * C + D * D;
+  var param = -1;
+  if (len_sq != 0) //in case of 0 length line
+      param = dot / len_sq;
+
+  var xx, yy;
+
+  if (param < 0) {
+    xx = x1;
+    yy = y1;
+  }
+  else if (param > 1) {
+    xx = x2;
+    yy = y2;
+  }
+  else {
+    xx = x1 + param * C;
+    yy = y1 + param * D;
+  }
+
+  var dx = x - xx;
+  var dy = y - yy;
+  return Math.sqrt(dx * dx + dy * dy);
 }
