@@ -15,7 +15,7 @@ const loopLength = 350;
 
 function draw() {
     
-  
+    background(0)
     // Update center position based on mouse
     let centerX = mouseX;
     let centerY = mouseY;
