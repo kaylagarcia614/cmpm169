@@ -103,5 +103,8 @@ function keyPressed() {
     if (keyCode === ENTER) {
       newMode = !newMode;
       background(0); // Clear canvas when switching modes
-    }
+    }else if (key === 's') {
+        saveCanvas('canvasScreenshot', 'png'); // Save canvas as PNG image
+      }
   }
+
