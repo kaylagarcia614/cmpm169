@@ -4,7 +4,7 @@
   border: solid 1px rgb(175, 162, 162);
   background-color: #AFA2A2; 
   color: rgb(48, 47, 47);
-  font-family: 'Comic Sans MS', cursive; /* Use Roboto font */
+  font-family: 'Comic Sans MS', sans-serif; /* Use Roboto font */
 }
 
 .minor-section {
