@@ -4,11 +4,11 @@ const PAD = S / 12;
 
 const N = 100;
 const spacing = (S - PAD * 2) / N;
-
+let newMode = false;
 function setup() {
   createCanvas(S, S);
   frameRate(120);
-  background(0);
+  background(0)
 }
 
 const loopLength = 350;
@@ -55,32 +55,53 @@ function draw() {
 //stays unchanged, basically a grid so the circles dont overlap with eachother
 function pDistance(x, y, x1, y1, x2, y2) {
 
-  var A = x - x1;
-  var B = y - y1;
-  var C = x2 - x1;
-  var D = y2 - y1;
+    if (!newMode) {
 
-  var dot = A * C + B * D;
-  var len_sq = C * C + D * D;
-  var param = -1;
- 
 
-  var xx, yy;
+        // Original pDistance function
+        var A = x - x1;
+        var B = y - y1;
+        var C = x2 - x1;
+        var D = y2 - y1;
+    
+        var dot = A * C + B * D;
+        var len_sq = C * C + D * D;
+        var param = dot / len_sq;
+    
+        var xx, yy;
+    
+        if (param < 0) {
+          xx = x1;
+          yy = y1;
+        } else if (param > 1) {
+          xx = x2;
+          yy = y2;
+        } else {
+          xx = x1 + param * C;
+          yy = y1 + param * D;
+        }
+    
+        var dx =  xx;
+        var dy =  yy;
+        return Math.sqrt(dx * dx + dy * dy);
+      } else {
 
-  if (param < 0) {
-    xx = x1;
-    yy = y1;
-  }
-  else if (param > 1) {
-    xx = x2;
-    yy = y2;
-  }
-  else {
-    xx = x1 + param * C;
-    yy = y1 + param * D;
-  }
 
-  var dx = x - xx;
-  var dy = y - yy;
-  return Math.sqrt(dx * dx + dy * dy);
+        // Adjusted from original function to create new mode
+        let dx1 =  x1;
+        let dy1 =  y1;
+        let dist1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+    
+        let dx2 = x - x2;
+        let dy2 = y - y2;
+        let dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+    
+        return min(dist1, dist2);
+      }
 }
+function keyPressed() {
+    if (keyCode === ENTER) {
+      newMode = !newMode;
+      background(0); // Clear canvas when switching modes
+    }
+  }
