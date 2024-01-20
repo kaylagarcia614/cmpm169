@@ -2,12 +2,12 @@ const S = 600;
 
 const PAD = S / 12;
 
-const N = 24;
+const N = 100;
 const spacing = (S - PAD * 2) / N;
 
 function setup() {
   createCanvas(S, S);
-  frameRate(50);
+  frameRate(120);
 }
 
 const loopLength = 350;
@@ -25,7 +25,8 @@ function draw() {
   
     for (let x = 0; x <= N; x++) {
       for (let y = 0; y <= N; y++) {
-        let R = 100;
+        // Update radius based on sine wave
+        let R = 100 + 50 * sin(C + x * 0.1 + y * 0.1);
         let x1 = centerX + R * cos(C);
         let y1 = centerY + R * sin(C);
   
@@ -49,7 +50,8 @@ function draw() {
       }
     }
   }
-
+  
+//stays unchanged, basically a grid so the circles dont overlap with eachother
 function pDistance(x, y, x1, y1, x2, y2) {
 
   var A = x - x1;
