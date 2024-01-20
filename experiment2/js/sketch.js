@@ -1,3 +1,6 @@
+// project.js - Vector and Generative Art
+// Author: Kayla Garcia
+// Date:1/19/2024
 const S = 600;
 
 const PAD = S / 12;
@@ -6,7 +9,8 @@ const N = 100;
 const spacing = (S - PAD * 2) / N;
 let newMode = false;
 function setup() {
-  createCanvas(S, S);
+    let canvas=createCanvas(600, 600);
+    canvas.parent('canvas-container');
   frameRate(120);
   background(0)
 }
