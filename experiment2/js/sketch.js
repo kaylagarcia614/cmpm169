@@ -8,12 +8,13 @@ const spacing = (S - PAD * 2) / N;
 function setup() {
   createCanvas(S, S);
   frameRate(120);
+  background(0);
 }
 
 const loopLength = 350;
 
 function draw() {
-    background(0);
+    
   
     // Update center position based on mouse
     let centerX = mouseX;
