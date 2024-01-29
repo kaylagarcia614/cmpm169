@@ -31,7 +31,7 @@ function setup() {
   createCanvas(600, 600);
   noStroke();
   let canvas=createCanvas(600, 600);
-    canvas.parent('canvas-container');
+  canvas.parent('canvas-container');
   // Randomly select a color palette initially
   changeColorPalette();
   
@@ -52,7 +52,7 @@ function draw() {
   translate(width/2, height/2);
   for(let i = 0; i <= count; i ++){
     var x = cos(i * myPI * TWO_PI)*(i/count)*rad;
-    var y = sin(i * myPI * TWO_PI)*(i/count)*rad;
+    var y = sin(i * myPI * TWO_PI + sineWaveOffset) * (i/count) * rad; // Modified this line
 
     // Apply the sine wave offset if space key is pressed
     if (isSpacePressed) {
@@ -66,6 +66,9 @@ function draw() {
     circle(x, y, abs(cos(i*mouse.y/count + mytime*2)*mouse.x));
   }
   pop();
+
+  // Increment the sine wave offset over time
+  sineWaveOffset += sineWaveSpeed;
 }
 
 function mousePressed() {
