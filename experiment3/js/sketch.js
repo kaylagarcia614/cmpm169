@@ -80,7 +80,7 @@ function keyPressed() {
   // Check if the space key is pressed
   if (keyCode === 32) {
     // Toggle the flag to start/stop the sine wave pattern
-    isSpacePressed = !isSpacePressed;
+    isSpacePressed = !isSpacePressed; 
     
     // Reset the sine wave offset when starting the pattern
     if (isSpacePressed) {
