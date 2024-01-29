@@ -22,8 +22,8 @@ function setup() {
   createCanvas(600, 600);
   noStroke();
   
-  // Randomly select a color palette
-  currentPalette = random(colorPalettes);
+  // Randomly select a color palette initially
+  changeColorPalette();
   
   rad = width;
   mouse = createVector(mouseX, mouseY);
@@ -49,4 +49,13 @@ function draw() {
     circle(x, y, abs(cos(i*mouse.y/count + mytime*2)*mouse.x));
   }
   pop();
+}
+
+function mousePressed() {
+  // Change the color palette when the mouse is clicked
+  changeColorPalette();
+}
+
+function changeColorPalette() {
+  currentPalette = random(colorPalettes);
 }
