@@ -10,6 +10,10 @@ const myPI = (1 + Math.sqrt(5))/2;
 var mouse;
 
 var pulseSpeed = 0.02; // Adjust the pulse speed
+var sineWaveOffset = 0; // Variable to control sine wave pattern
+var sineWaveSpeed = 0.01; // Adjust the speed of the sine wave
+var isSpacePressed = false; // Flag to check if the space key is pressed
+
 // Define multiple color palettes
 var colorPalettes = [
   ['#FF3E4D', '#FC8262', '#FF0000', '#A8D8EA', '#00E4F1'],
@@ -20,14 +24,14 @@ var colorPalettes = [
   ['#FF0000', '#FFB200', '#73FF00', '#00F5FF', '#FF0000'],
 ];
 
-
 var currentPalette;
 var trailAlpha = 20; // Trail opacity
 
 function setup() {
   createCanvas(600, 600);
   noStroke();
-  
+  let canvas=createCanvas(600, 600);
+    canvas.parent('canvas-container');
   // Randomly select a color palette initially
   changeColorPalette();
   
@@ -39,7 +43,7 @@ function draw() {
   mytime = frameCount/100;
   mouse.x = map(mouseX, 0, width, 0, 50);
   mouse.y = map(mouseY, 0, width, 0, 20);
-  count = abs(cos(mytime/100)*5000);
+  count = abs(cos(mytime/8)*5000);
   
   // Draw a semi-transparent background each frame
   background(0, trailAlpha);
@@ -50,11 +54,16 @@ function draw() {
     var x = cos(i * myPI * TWO_PI)*(i/count)*rad;
     var y = sin(i * myPI * TWO_PI)*(i/count)*rad;
 
+    // Apply the sine wave offset if space key is pressed
+    if (isSpacePressed) {
+      x += sin(i * sineWaveSpeed + sineWaveOffset) * 50;
+    }
+
     // Use the current color palette
     var index = i % currentPalette.length;
     fill(color(currentPalette[index]));
     
-    circle(x, y, abs(cos(i*mouse.y/count + mytime*5)*mouse.x));
+    circle(x, y, abs(cos(i*mouse.y/count + mytime*2)*mouse.x));
   }
   pop();
 }
@@ -62,6 +71,19 @@ function draw() {
 function mousePressed() {
   // Change the color palette when the mouse is clicked
   changeColorPalette();
+}
+
+function keyPressed() {
+  // Check if the space key is pressed
+  if (keyCode === 32) {
+    // Toggle the flag to start/stop the sine wave pattern
+    isSpacePressed = !isSpacePressed;
+    
+    // Reset the sine wave offset when starting the pattern
+    if (isSpacePressed) {
+      sineWaveOffset = 0;
+    }
+  }
 }
 
 function changeColorPalette() {
