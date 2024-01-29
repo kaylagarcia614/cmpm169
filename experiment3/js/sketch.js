@@ -9,14 +9,20 @@ var mapRadiusHole = 0;
 const myPI = (1 + Math.sqrt(5))/2;
 var mouse;
 
+var pulseSpeed = 0.02; // Adjust the pulse speed
 // Define multiple color palettes
 var colorPalettes = [
-  ['#FF3E4D', '#FC8262', '#FFD076', '#A8D8EA', '#94A5A6'],
-  ['#6A0572', '#AB83A1', '#C7B7A9', '#FFD8BE', '#FFE981'],
-  ['#003049', '#D62828', '#F77F00', '#FCBF49', '#EAE2B7']
+  ['#FF3E4D', '#FC8262', '#FF0000', '#A8D8EA', '#00E4F1'],
+  ['#6A0572', '#AB83A1', '#C7B7A9', '#0A9FB1', '#2400BD'],
+  ['#003049', '#D62828', '#F77F00', '#FCBF49', '#EAE2B7'],
+	['#000000', '#464646', '#555555', '#AEAEAE', '#FFFFFF'],
+	['#C0E3F5', '#37D628', '#F77F00', '#E949FC', '#9C0536'],
+	['#FF0000', '#FFB200', '#73FF00', '#00F5FF', '#FF0000'],
 ];
 
 var currentPalette;
+var currentPalette;
+var trailAlpha = 20; // Trail opacity
 
 function setup() {
   createCanvas(600, 600);
@@ -35,7 +41,9 @@ function draw() {
   mouse.y = map(mouseY, 0, width, 0, 20);
   count = abs(cos(mytime/8)*5000);
   
-  background(0);
+  // Draw a semi-transparent background each frame
+  background(0, trailAlpha);
+  
   push();
   translate(width/2, height/2);
   for(let i = 0; i <= count; i ++){
