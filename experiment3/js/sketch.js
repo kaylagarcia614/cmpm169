@@ -1,3 +1,6 @@
+// project.js - Generative Art
+// Author: Kayla Garcia
+// Date:1/29/2024
 var rad = 0;
 var mysize = 200;
 var count = 500;
