@@ -1,3 +1,6 @@
+// project.js - 3D Art
+// Author: Kayla Garcia
+// Date:2/12/2024
 let angleX = 0;
 let angleY = 0;
 let angleZ = 0;
@@ -8,7 +11,8 @@ let breathingSpeed = 0.02; // Speed of the breathing effect
 let breathingRange = 50; // Range of brightness oscillation
 
 function setup() {
-  createCanvas(800, 800, WEBGL);
+    let canvas=createCanvas(600, 600,WEBGL);
+    canvas.parent('canvas-container');
 }
 
 function draw() {
@@ -27,13 +31,13 @@ function draw() {
   let brightnessOffset = map(sin(frameCount * breathingSpeed), -1, 1, -breathingRange, breathingRange);
 
   for (let i = 0; i < 1000; i++) { // Drawing 1000 spheres
-    let x = map(noise(noiseScale * i), 0, 1, -400, 400); // Generate x position based on Perlin noise
-    let y = map(noise(noiseScale * i + 1000), 0, 1, -400, 400); // Generate y position based on Perlin noise
-    let z = map(noise(noiseScale * i + 2000), 0, 1, -400, 400); // Generate z position based on Perlin noise
+    let x = map(noise(noiseScale * i), 0, 1, -400, 400); 
+    let y = map(noise(noiseScale * i + 1000), 0, 1, -400, 400); 
+    let z = map(noise(noiseScale * i + 2000), 0, 1, -400, 400); 
 
-    let r = map(sin(frameCount * 0.01 + x + y + z), -1, 1, 200, 255) + brightnessOffset; // Shades of gold and yellow
-    let g = map(sin(frameCount * 0.02 + x + y + z), -1, 1, 200, 255) + brightnessOffset; // Shades of gold and yellow
-    let b = map(sin(frameCount * 0.03 + x + y + z), -1, 1, 200, 255) + brightnessOffset; // Shades of gold and yellow
+    let r = map(sin(frameCount * 0.01 + x + y + z), -1, 1, 200, 255) + brightnessOffset; 
+    let g = map(sin(frameCount * 0.02 + x + y + z), -1, 1, 200, 255) + brightnessOffset; 
+    let b = map(sin(frameCount * 0.03 + x + y + z), -1, 1, 200, 255) + brightnessOffset; 
 
     push();
     translate(x, y, z);
