@@ -1,7 +1,8 @@
 let angleX = 0;
 let angleY = 0;
 let angleZ = 0;
-let sphereSize = 15; // Size of each sphere
+let sphereSize = 5; // Size of each sphere
+let gridSize = 5; // Number of spheres in each direction
 
 function setup() {
   createCanvas(800, 800, WEBGL);
@@ -17,9 +18,9 @@ function draw() {
   rotateY(angleY);
   rotateZ(angleZ);
 
-  for (let i = -10; i <= 10; i++) {
-    for (let j = -10; j <= 10; j++) {
-      for (let k = -10; k <= 10; k++) {
+  for (let i = -gridSize; i <= gridSize; i++) {
+    for (let j = -gridSize; j <= gridSize; j++) {
+      for (let k = -gridSize; k <= gridSize; k++) {
         let r = map(sin(frameCount * 0.01 + i + j + k), -1, 1, 0, 255);
         let g = map(sin(frameCount * 0.02 + i + j + k), -1, 1, 0, 255);
         let b = map(sin(frameCount * 0.03 + i + j + k), -1, 1, 0, 255);
