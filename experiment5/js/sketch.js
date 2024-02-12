@@ -17,6 +17,9 @@ function draw() {
   strokeWeight(2);
   scale(zoomFactor); // Apply zoom factor
 
+  angleX = map(mouseY, 0, height, -PI, PI); // Rotate around X-axis based on mouseY position
+  angleY = map(mouseX, 0, width, -PI, PI); // Rotate around Y-axis based on mouseX position
+
   rotateX(angleX);
   rotateY(angleY);
   rotateZ(angleZ);
@@ -24,13 +27,13 @@ function draw() {
   let brightnessOffset = map(sin(frameCount * breathingSpeed), -1, 1, -breathingRange, breathingRange);
 
   for (let i = 0; i < 1000; i++) { // Drawing 1000 spheres
-    let x = map(noise(noiseScale * i), 0, 1, -400, 400); 
-    let y = map(noise(noiseScale * i + 1000), 0, 1, -400, 400); 
-    let z = map(noise(noiseScale * i + 2000), 0, 1, -400, 400); 
+    let x = map(noise(noiseScale * i), 0, 1, -400, 400); // Generate x position based on Perlin noise
+    let y = map(noise(noiseScale * i + 1000), 0, 1, -400, 400); // Generate y position based on Perlin noise
+    let z = map(noise(noiseScale * i + 2000), 0, 1, -400, 400); // Generate z position based on Perlin noise
 
-    let r = map(sin(frameCount * 0.01 + x + y + z), -1, 1, 200, 255) + brightnessOffset; 
-    let g = map(sin(frameCount * 0.02 + x + y + z), -1, 1, 200, 255) + brightnessOffset; 
-    let b = map(sin(frameCount * 0.03 + x + y + z), -1, 1, 200, 255) + brightnessOffset; 
+    let r = map(sin(frameCount * 0.01 + x + y + z), -1, 1, 200, 255) + brightnessOffset; // Shades of gold and yellow
+    let g = map(sin(frameCount * 0.02 + x + y + z), -1, 1, 200, 255) + brightnessOffset; // Shades of gold and yellow
+    let b = map(sin(frameCount * 0.03 + x + y + z), -1, 1, 200, 255) + brightnessOffset; // Shades of gold and yellow
 
     push();
     translate(x, y, z);
@@ -39,10 +42,6 @@ function draw() {
     sphere(sphereSize);
     pop();
   }
-
-  angleX += 0.01;
-  angleY += 0.02;
-  angleZ += 0.03;
 }
 
 function mouseWheel(event) {
