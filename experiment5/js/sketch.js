@@ -1,7 +1,7 @@
 let angleX = 0;
 let angleY = 0;
 let angleZ = 0;
-let cubeSize = 150;
+let sphereSize = 15; // Size of each sphere
 
 function setup() {
   createCanvas(800, 800, WEBGL);
@@ -17,17 +17,18 @@ function draw() {
   rotateY(angleY);
   rotateZ(angleZ);
 
-  for (let i = -cubeSize; i <= cubeSize; i += 50) {
-    for (let j = -cubeSize; j <= cubeSize; j += 50) {
-      for (let k = -cubeSize; k <= cubeSize; k += 50) {
+  for (let i = -10; i <= 10; i++) {
+    for (let j = -10; j <= 10; j++) {
+      for (let k = -10; k <= 10; k++) {
         let r = map(sin(frameCount * 0.01 + i + j + k), -1, 1, 0, 255);
         let g = map(sin(frameCount * 0.02 + i + j + k), -1, 1, 0, 255);
         let b = map(sin(frameCount * 0.03 + i + j + k), -1, 1, 0, 255);
 
         push();
-        translate(i, j, k);
+        translate(i * 50, j * 50, k * 50);
         stroke(r, g, b);
-        box(15);
+        ambientMaterial(r, g, b);
+        sphere(sphereSize);
         pop();
       }
     }
@@ -39,5 +40,5 @@ function draw() {
 }
 
 function mouseClicked() {
-  cubeSize += 10;
+  sphereSize += 1;
 }
